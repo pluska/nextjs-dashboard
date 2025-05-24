@@ -1,13 +1,11 @@
+import { lusitana } from "@/app/ui/fonts";
+import { fetchRevenue } from "@/app/lib/data";
 import { generateYAxis } from "@/app/lib/utils";
 import { CalendarIcon } from "@heroicons/react/24/outline";
-import { lusitana } from "@/app/ui/fonts";
-import { Revenue } from "@/app/lib/definitions";
-import { fetchRevenue } from "@/app/lib/data";
 
 export default async function RevenueChart() {
   const revenue = await fetchRevenue();
   const chartHeight = 350;
-
   const { yAxisLabels, topLabel } = generateYAxis(revenue);
 
   if (!revenue || revenue.length === 0) {
@@ -36,7 +34,7 @@ export default async function RevenueChart() {
               <div
                 className="w-full rounded-md bg-blue-300"
                 style={{
-                  height: `${(chartHeight / topLabel) * month.revenue}px`,
+                  height: `${(month.revenue / topLabel) * 100}%`,
                 }}
               ></div>
               <p className="-rotate-90 text-sm text-gray-400 sm:rotate-0">
